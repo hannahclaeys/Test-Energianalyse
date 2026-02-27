@@ -1,7 +1,7 @@
 
 #%%
 
-# Import packages
+#Import packages
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -55,9 +55,9 @@ colorlist: dict = [plotColors[str(year)] for  year in ElPrice_mean_year['Year']]
 plt.bar(ElPrice_mean_year["Year"].to_numpy(), ElPrice_mean_year["l_s"].to_numpy(), color = colorlist)
 plt.xticks(list(range(2021,2026)), rotation = 45)
 plt.grid(True, alpha = 0.5)
-plt.ylabel(r"El-price [$DKK$]")
-plt.title("Avarage daily elektrisity price for each year")
-plt.savefig("Avarage daily elektrisity price for each year")
+plt.ylabel(r"Price [$DKK$]")
+plt.title("Average daily electricity price for each year")
+plt.savefig("Average daily electricity price for each year")
 plt.show()
 
 
@@ -85,8 +85,8 @@ plt.xticks(list(range(24)))
 plt.xlim(0,23)
 plt.ylabel(r"Sell price [$DKK$]")
 plt.xlabel("Hours")
-plt.title("Sell price for the avarage day at a given hour")
-plt.savefig("Sell price for the avarage day at a given hour")
+plt.title("Sell price for the average day at a given hour")
+plt.savefig("Sell price for the average day at a given hour")
 plt.show()
 
 #%%
@@ -94,7 +94,7 @@ plt.show()
 #Task 2x
 
 ElPrice_day1 = ElPrice.iloc[:25,ElPrice.columns.get_loc('l_s')].to_numpy()
-print("El pricen de første 24 timer")
+print("Price the first 24 hours")
 #print(ElPrice_day1)
 
 params = {
@@ -110,7 +110,7 @@ from Task2 import DayliOptimizer, regression
 
 year = 2021
 month = 1 # Jan
-dayInMonth = 31 #Antal dage i Januar
+dayInMonth = 31 # Number of days in January
 
 numberOfDayForAllMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
 profit_list = np.zeros(365)
@@ -122,7 +122,7 @@ profitEachYear = defaultdict(np.array)
 charging_array = np.empty(1)
 discharging_array = np.empty(1)
 SOC_array = np.empty(1)
-DayNryear = 0 # Hvilken dag vi er noget til i året
+DayNryear = 0 # The number of the day of the year
 
 while year < 2026:
     for day in range(1, dayInMonth+1):
@@ -199,16 +199,16 @@ plt.show()
 
 plt.bar(range(len(profitEachYear)),[np.mean(value) for value in profitEachYear.values()],align = 'center', color = colorlist)
 plt.ylabel("Profit [DKK]")
-plt.title("Daily profit for the avarage for each year")
+plt.title("Daily profit for the average for each year")
 plt.xticks(range(len(profitEachYear)),list(profitEachYear.keys()))
 plt.grid(True, alpha = 0.5)
-plt.savefig("Daily profit for the avarage for each year")
+plt.savefig("Daily profit for the average for each year")
 plt.show()
 
 for key in profitEachYear.keys():
     plt.scatter(maxSPCombined[key], profitEachYear[key], color = plotColors[key], label = key, alpha = 0.8)
 #plt.scatter(dailyMaxSP, dailyProfit)
-plt.xlabel("Max sell price for the day")
+plt.xlabel("Max sell price of the day")
 plt.ylabel("Profit for the day")
 plt.legend()
 plt.title("Daily profit over max sell price for the day")
@@ -218,11 +218,11 @@ plt.show()
 #plt.scatter(dailyMinSP, dailyProfit)
 for key in profitEachYear.keys():
     plt.scatter(minSPCombined[key], profitEachYear[key], color = plotColors[key], label = key, alpha = 0.8)
-plt.xlabel("Min sell price for the day")
+plt.xlabel("Minimum sell price for the day")
 plt.ylabel("Profit for the day")
-plt.title("Daily profit over min sell price for the day")
+plt.title("Daily profit over minimum sell price for the day")
 plt.legend()
-plt.savefig("Daily profit over min sell price for the day")
+plt.savefig("Daily profit over minimum sell price for the day")
 plt.show()
 
 listDiff: list[np.array] = []
@@ -245,7 +245,7 @@ for key in profitEachYear.keys():
     plt.scatter(dailyDiffYearly, profitEachYear[key], color = plotColors[key], label = key, alpha = 0.8)
     #plt.plot(xValues, yValues, "--", color = plotColors[key], label = f"{betas[0]:.2f}+{betas[1]:.2f}x", alpha = 0.8)
     #print(f"The expected profit for the avrage day in year {key} is {profitMeanYear:.2f}")
-    print(f"The real avarage daily profit for that year was {np.mean(profitEachYear[key]):.2f}")
+    print(f"The real average daily profit for that year was {np.mean(profitEachYear[key]):.2f}")
 
 plt.xlabel("Diff sell price for the day")
 plt.ylabel("Profit for the day")
@@ -345,7 +345,7 @@ while seePlot:
         color = 'tab:red'
         ax1.step(list(range(24)),ElPrice_dayN, color = color)
         #ax1.bar(list(range(0,24)),ElPrice_dayN, width = -0.8, color = color, align = 'edge')
-        ax1.set_ylabel("El-Price", color =color)
+        ax1.set_ylabel("Price", color =color)
         ax1.set_xlabel("Hours")
         ax1.set_xticks(list(range(0,24)))
         ax1.set_xlim(0,23)
@@ -369,4 +369,3 @@ while seePlot:
 
 
 # %%
-
